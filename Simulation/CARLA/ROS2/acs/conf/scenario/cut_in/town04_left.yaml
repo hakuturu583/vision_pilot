@@ -17,16 +17,17 @@ ego:
 
 scenario:
   npc_lanelet_id: 77298
-  # The outer lanelet is the longer: 22 m along it is some 11 m ahead on the road.
+  # The outer lanelet is the longer: 22 m along it is some 13 m ahead on the road.
   npc_ahead_m: 22.0
 
 controls:
   vehicle_ahead_gap_m:
     key: scenario.npc_ahead_m
     range: [6.0, 30.0]
-    # What the ODD measures is the gap on the road: written 11 m further along
-    # the NPC's lanelet.
-    offset: 11.0
+    # What the ODD measures is the gap on the road: written 8.8 m further along
+    # the NPC's lanelet. Calibrated on 36 runs: with 11 m the gap the probe
+    # measured at the start was the drawn one + 2.2 m (2.11-2.35).
+    offset: 8.8
   vehicle_ahead_relative_speed_kph:
     key: scenario.npc_initial_speed_kmh
     offset: ${ego.initial_speed_kmh}

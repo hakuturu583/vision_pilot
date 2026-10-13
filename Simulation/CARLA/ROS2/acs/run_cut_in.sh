@@ -69,7 +69,7 @@ done
 
 # The cut-in from the left on lanelet 79016, where Town04_Opt's spawn point 5
 # stands, inside OpenDRIVE road 41 (README.md, "The Town04 map"). The NPC's
-# lanelet is the longer outer one: 22 m along it is some 11 m ahead on the road.
+# lanelet is the longer outer one: 22 m along it is some 13 m ahead on the road.
 cd "$ACS_DIR"
 uv run --no-sync scenario \
     "hydra.searchpath=[file://$HERE/conf]" \

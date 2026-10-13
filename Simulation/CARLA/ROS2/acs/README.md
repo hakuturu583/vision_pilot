@@ -85,7 +85,8 @@ neighbour:
   checks the cut-in against the ego's OpenDRIVE road and lane, so the whole
   manoeuvre has to stay on one road.
 - The NPC starts on lanelet 77298, the lane to its left, at s = 640 + 22 m: about
-  11 m ahead of the ego on the road.
+  13 m ahead of the ego on the road (measured: the ODD gap probe reads the
+  lanelet distance less 8.8 m).
 
 ## A server built without ROS 2, and the CARLA client
 
