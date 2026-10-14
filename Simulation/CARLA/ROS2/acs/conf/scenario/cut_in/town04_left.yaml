@@ -17,17 +17,18 @@ ego:
 
 scenario:
   npc_lanelet_id: 77298
-  # The outer lanelet is the longer: 22 m along it is some 13 m ahead on the road.
-  npc_ahead_m: 22.0
+  # The NPC's rear bumper 8 m ahead of the ego's front one, along the ego's
+  # lane (autoware_carla_scenario 12.0's vehicle-ahead gap): placed by the
+  # measure itself, so the outer lanelet being the longer does not matter.
+  npc_gap_m: 8.0
 
 controls:
   vehicle_ahead_gap_m:
-    key: scenario.npc_ahead_m
-    range: [6.0, 30.0]
-    # What the ODD measures is the gap on the road: written 8.8 m further along
-    # the NPC's lanelet. Calibrated on 36 runs: with 11 m the gap the probe
-    # measured at the start was the drawn one + 2.2 m (2.11-2.35).
-    offset: 8.8
+    # Drawn as the measure itself (target: measure), bumper to bumper along
+    # the ego's lane: no calibration offset.
+    key: scenario.npc_gap_m
+    target: measure
+    range: [2.0, 30.0]
   vehicle_ahead_relative_speed_kph:
     key: scenario.npc_initial_speed_kmh
     offset: ${ego.initial_speed_kmh}

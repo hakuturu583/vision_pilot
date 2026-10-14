@@ -9,7 +9,7 @@
 # Needs a CARLA 0.10 server on Town04_Opt (CARLA_HOST:CARLA_PORT), the
 # visionpilot:gpu-ros2 image (VisionPilot/docker/build.sh --gpu --ros2) and an
 # autoware_carla_scenario checkout with the ros2 extra synced (ACS_DIR). Extra
-# arguments are Hydra overrides for the scenario, e.g. scenario.npc_ahead_m=15.
+# arguments are Hydra overrides for the scenario, e.g. scenario.npc_gap_m=15.
 #
 # Environment:
 #   ACS_DIR         autoware_carla_scenario checkout (default: ../../../../../autoware_carla_scenario)
@@ -69,7 +69,7 @@ done
 
 # The cut-in from the left on lanelet 79016, where Town04_Opt's spawn point 5
 # stands, inside OpenDRIVE road 41 (README.md, "The Town04 map"). The NPC's
-# lanelet is the longer outer one: 22 m along it is some 13 m ahead on the road.
+# rear bumper starts 8 m ahead of the ego's front one, along the ego's lane.
 cd "$ACS_DIR"
 uv run --no-sync scenario \
     "hydra.searchpath=[file://$HERE/conf]" \
@@ -79,7 +79,7 @@ uv run --no-sync scenario \
     ego.spawn_lanelet_id=79016 \
     ego.spawn_s=640.0 \
     scenario.npc_lanelet_id=77298 \
-    scenario.npc_ahead_m=22 \
+    scenario.npc_gap_m=8 \
     server.host="$CARLA_HOST" \
     server.port="$CARLA_PORT" \
     "$@"

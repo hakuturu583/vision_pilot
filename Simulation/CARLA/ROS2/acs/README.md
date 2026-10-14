@@ -50,8 +50,9 @@ flowchart LR
 2. The VisionPilot image: `VisionPilot/docker/build.sh --gpu --ros2`.
 
 3. An autoware_carla_scenario checkout with the `ros2` extra (`uv sync --dev`), at
-   `ACS_DIR`. It needs `ros2.cameras` (autoware_carla_scenario after 10.5.0) when the
-   server has no ROS 2.
+   `ACS_DIR`. It needs autoware_carla_scenario 12.0 or later: `ros2.cameras` when the
+   server has no ROS 2, and the vehicle-ahead gap measured bumper to bumper along
+   the ego's lane, which places the NPC (`scenario.npc_gap_m`).
 
 4. The Town04 map, once (below).
 
@@ -84,9 +85,10 @@ neighbour:
   s = 640 m, where the lane runs straight inside OpenDRIVE road 41. The scenario
   checks the cut-in against the ego's OpenDRIVE road and lane, so the whole
   manoeuvre has to stay on one road.
-- The NPC starts on lanelet 77298, the lane to its left, at s = 640 + 22 m: about
-  13 m ahead of the ego on the road (measured: the ODD gap probe reads the
-  lanelet distance less 8.8 m).
+- The NPC starts on lanelet 77298, the lane to its left, with its rear bumper 8 m
+  ahead of the ego's front one along the ego's lane (`scenario.npc_gap_m`). The
+  framework places it with the ODD's own gap measure, so the outer lanelet being
+  the longer needs no correction.
 
 ## A server built without ROS 2, and the CARLA client
 
